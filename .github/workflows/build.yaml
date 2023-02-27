@@ -1,0 +1,20 @@
+name: Streamlit Github actions
+
+on:
+  push:
+     branches: [main]
+jobs:
+  build:
+     runs-on: ubuntu-latest
+     
+     steps:
+      - uses: actions/checkout@v2
+      
+      - name: Build a Docker image
+        run: docker build -f Dockerfile -t app:latest .
+      
+      - name: run the Docker image
+        run: docker run -p 805
+
+      - name: Run the Docker container
+        run: docker run -p 8501:8501 app:latest
